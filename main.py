@@ -39,23 +39,23 @@ def test():
     record()
     print(transcribe())
 
+def test_llm():
+    record()
+
+    url = "http://localhost:1234/v1/chat/completions"
+    headers = {"Content-Type": "application/json"}
+    payload = {
+        "model": "llama-3.2-1b-instruct",
+        "messages": [{"role": "user", "content": transcribe()}],
+        "temperature": 0.7
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    print(response.json()['choices'][0]['message']['content'])
 
 
 
-url = "http://localhost:1234/v1/chat/completions"
-headers = {"Content-Type": "application/json"}
-payload = {
-    "model": "llama-3.2-1b-instruct",
-    "messages": [{"role": "user", "content": "Tell me a joke about computers."}],
-    "temperature": 0.7
-}
-
-response = requests.post(url, headers=headers, data=json.dumps(payload))
-print(response.json()['choices'][0]['message']['content'])
-
-
-
-
+test_llm()
 # test()
 
 
