@@ -5,12 +5,23 @@ from scipy.io.wavfile import write
 import whisper
 import requests
 import json
+import pyttsx3
+
+
+engine = pyttsx3.init()
+
+
 
 #flag for debug outputs
 debug = True
 name = 'jonah'
 
 os.chdir(f'C:\\Users\\{name}\\Downloads\\')
+
+def tts(speech):
+    engine.say(speech)
+    engine.runAndWait()
+
 
 
 def record(duration=5, path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
@@ -52,6 +63,7 @@ def test_llm():
 
     response = requests.post(url, headers=headers, data=json.dumps(payload))
     print(response.json()['choices'][0]['message']['content'])
+    tts((response.json()['choices'][0]['message']['content']))
 
 
 
