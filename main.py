@@ -4,12 +4,15 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 import whisper
 
+
+#flag for debug outputs
 debug = True
+name = 'jonah'
 
-os.chdir('C:\\Users\\jonah\\Downloads\\')
+os.chdir(f'C:\\Users\\{name}\\Downloads\\')
 
 
-def record(duration=5, path="C:\\Users\\jonah\\Downloads\\output-mic.wav"):
+def record(duration=5, path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
     '''record single channel audio into a wav file'''
     fs = 44100  # Sample rate (44.1 kHz is CD quality)
 
@@ -24,7 +27,7 @@ def record(duration=5, path="C:\\Users\\jonah\\Downloads\\output-mic.wav"):
         print(f"file exists: {os.path.exists(path)}")
 
 
-def transcribe(path="C:\\Users\\jonah\\Downloads\\output-mic.wav"):
+def transcribe(path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
     '''transcribe a wav file with Whisper'''
     model = whisper.load_model("tiny")
     result = model.transcribe(path)
