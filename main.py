@@ -3,7 +3,8 @@ import os
 import sounddevice as sd
 from scipy.io.wavfile import write
 import whisper
-
+import requests
+import json
 
 #flag for debug outputs
 debug = True
@@ -29,7 +30,7 @@ def record(duration=5, path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
 
 def transcribe(path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
     '''transcribe a wav file with Whisper'''
-    model = whisper.load_model("tiny")
+    model = whisper.load_model("base")
     result = model.transcribe(path)
     return "\n"+result["text"]
 
@@ -38,5 +39,23 @@ def test():
     record()
     print(transcribe())
 
+
+
+
+url = "http://localhost:1234/v1/chat/completions"
+headers = {"Content-Type": "application/json"}
+payload = {
+    "model": "llama-3.2-1b-instruct",
+    "messages": [{"role": "user", "content": "Tell me a joke about computers."}],
+    "temperature": 0.7
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json()['choices'][0]['message']['content'])
+
+
+
+
+# test()
 
 
