@@ -10,7 +10,8 @@ import pyttsx3
 
 engine = pyttsx3.init()
 
-
+engine.say("test")
+engine.runAndWait()
 
 #flag for debug outputs
 debug = True
@@ -43,7 +44,7 @@ def transcribe(path=f"C:\\Users\\{name}\\Downloads\\output-mic.wav"):
     '''transcribe a wav file with Whisper'''
     model = whisper.load_model("base")
     result = model.transcribe(path)
-    return "\n"+result["text"]
+    return result["text"]
 
 def test():
     '''test the main loop'''
@@ -51,6 +52,7 @@ def test():
     print(transcribe())
 
 def test_llm():
+    '''records a message, parses to whisper and then returns with tts'''
     record()
 
     url = "http://localhost:1234/v1/chat/completions"
