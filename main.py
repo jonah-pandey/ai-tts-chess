@@ -7,11 +7,12 @@ import requests
 import json
 import pyttsx3
 
+def tts_test():
+    '''tests tts functionality'''
+    engine = pyttsx3.init()
 
-engine = pyttsx3.init()
-
-engine.say("test")
-engine.runAndWait()
+    engine.say("test")
+    engine.runAndWait()
 
 #flag for debug outputs
 debug = True
@@ -20,6 +21,7 @@ name = 'jonah'
 os.chdir(f'C:\\Users\\{name}\\Downloads\\')
 
 def tts(speech):
+    engine = pyttsx3.init()
     engine.say(speech)
     engine.runAndWait()
 
